@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="MotivoRejeicao.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,37 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Motivo da Rejeição da NFS-e:
+/// 
+/// 1 - NFS-e em duplicidade;
+/// 2 - NFS-e já emitida pelo tomador;
+/// 3 - Não ocorrência do fato gerador;
+/// 4 - Erro quanto a responsabilidade tributária;
+/// 5 - Erro quanto ao valor do serviço, valor das deduções ou serviço prestado ou data do fato gerador;
+/// 9 - Outros;
+/// </summary>
+public enum MotivoRejeicao
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("1")]
+    Duplicidade,
+    
+    [DFeEnum("2")]
+    EmitidadaTomador,
+    
+    [DFeEnum("3")]
+    NaoOcorrencia,
+    
+    [DFeEnum("4")]
+    ErroResponsabilidadeTributaria,
+    
+    [DFeEnum("5")]
+    ErroValores,
+    
+    [DFeEnum("9")]
+    Outros
 }

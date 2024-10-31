@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="StatusNFSe.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,23 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// 100 - NFS-e Gerada;
+/// 101 - NFS-e de Substituição Gerada;
+/// 102 - NFS-e de Decisão Judicial;
+/// 103 - NFS-e Avulsa
+/// </summary>
+public enum StatusNFSe
 {
-    #region Properties
+    [DFeEnum("100")] Gerada,
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeEnum("101")] SubstituicaoGerada,
 
-    #endregion Properties
+    [DFeEnum("102")] DecisaoJudicial,
+
+    [DFeEnum("103")] Avulsa
 }

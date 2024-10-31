@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="AmbienteGerador.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+using OpenAC.Net.DFe.Core.Attributes;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
+
+/// <summary>
+/// Tipo Ambiente Gerador de NFS-e:
+/// 1 - Prefeitura;
+/// 2 - Sistema Nacional da NFS-e;
+/// </summary>
+public enum AmbienteGerador
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("1")]
+    Prefeitura,
+    
+    [DFeEnum("2")]
+    Nacional
 }

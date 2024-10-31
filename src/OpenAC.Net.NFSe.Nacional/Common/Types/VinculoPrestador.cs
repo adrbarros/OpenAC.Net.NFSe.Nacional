@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="VinculoPrestador.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,40 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Vínculo entre as partes no negócio:
+/// 0 - Sem vínculo com o tomador/ Prestador
+/// 1 - Controlada;
+/// 2 - Controladora;
+/// 3 - Coligada;
+/// 4 - Matriz;
+/// 5 - Filial ou sucursal;
+/// 6 - Outro vínculo;
+/// </summary>
+public enum VinculoPrestador
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("0")]
+    SemVinculo = 0,
+    
+    [DFeEnum("1")]
+    Controlada = 1,
+    
+    [DFeEnum("2")]
+    Controladora = 2,
+    
+    [DFeEnum("3")]
+    Coligada = 3,
+    
+    [DFeEnum("4")]
+    Matriz = 4,
+    
+    [DFeEnum("5")]
+    Filial = 5,
+    
+    [DFeEnum("6")]
+    Outro = 6
 }

@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ProcessoEmissao.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,24 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Processo de Emissão da DPS:
+/// 1 - Emissão com aplicativo do contribuinte (via Web Service);
+/// 2 - Emissão com aplicativo disponibilizado pelo fisco (Web);
+/// 3 - Emissão com aplicativo disponibilizado pelo fisco (App);
+/// </summary>
+public enum ProcessoEmissao
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("1")]
+    AplicativoContribuinte,
+    
+    [DFeEnum("2")]
+    AplicativoFiscoWeb,
+    
+    [DFeEnum("3")]
+    AplicativoFiscoApp,
 }

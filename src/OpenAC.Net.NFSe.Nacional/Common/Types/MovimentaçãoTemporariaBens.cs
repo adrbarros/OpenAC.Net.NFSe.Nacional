@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="MovimentaçãoTemporariaBens.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,19 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
-
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Operação está vinculada à Movimentação Temporária de Bens:
+/// 0 - Desconhecido (tipo não informado na nota de origem);
+/// 1 - Não
+/// 2 - Vinculada - Declaração de Importação
+/// 3 - Vinculada - Declaração de Exportação
+/// </summary>
+public enum MovimentacaoTemporariaBens
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    Desconhecido,
+    Nao,
+    DeclaracaoImportacao,
+    DeclaracaoExportacao
 }

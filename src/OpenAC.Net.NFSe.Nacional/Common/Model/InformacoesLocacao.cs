@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="InformacoesLocacao.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,23 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class InformacoesLocacao
 {
-    #region Properties
+    [DFeElement(TipoCampo.Enum, "categ", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public CategoriaLocacao Categoria { get; set; } = CategoriaLocacao.Locacao;
+    
+    [DFeElement(TipoCampo.Enum, "objeto", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public ObjetoLocacao Objeto { get; set; }
 
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeElement(TipoCampo.Int, "extensao", Min = 1, Max = 5, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public int ExtensaoTotal { get; set; }
+    
+    [DFeElement(TipoCampo.Int, "nPostes", Min = 1, Max = 6, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public int NumeroPostes { get; set; }
 }

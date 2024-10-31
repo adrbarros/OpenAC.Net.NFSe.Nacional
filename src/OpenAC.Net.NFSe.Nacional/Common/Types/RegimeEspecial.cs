@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : OpenAC.Net.NFSe.Nacional
 // Author           : RFTD
 // Created          : 09-09-2023
@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="RegimeEspecial.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,40 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Tipos de Regimes Especiais de Tributação:
+/// 0 - Nenhum;
+/// 1 - Ato Cooperado (Cooperativa);
+/// 2 - Estimativa;
+/// 3 - Microempresa Municipal;
+/// 4 - Notário ou Registrador;
+/// 5 - Profissional Autônomo;
+/// 6 - Sociedade de Profissionais;
+/// </summary>
+public enum RegimeEspecial
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("0")]
+    Nenhum,
+    
+    [DFeEnum("1")]
+    Cooperativa,
+    
+    [DFeEnum("2")]
+    Estimativa,
+    
+    [DFeEnum("3")]
+    MicroempresaMunicipal,
+    
+    [DFeEnum("4")]
+    NotarioRegistrador,
+    
+    [DFeEnum("5")]
+    ProfissionalAutonomo,
+    
+    [DFeEnum("6")]
+    SociedadeProfissionais,
 }

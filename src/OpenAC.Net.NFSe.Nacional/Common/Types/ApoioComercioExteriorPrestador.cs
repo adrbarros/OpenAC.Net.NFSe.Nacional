@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="MecanismoApoioComercioExterior.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,48 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Mecanismo de apoio/fomento ao Comércio Exterior utilizado pelo prestador do serviço:
+/// 00 - Desconhecido (tipo não informado na nota de origem);
+/// 01 - Nenhum;
+/// 02 - ACC - Adiantamento sobre Contrato de Câmbio – Redução a Zero do IR e do IOF;
+/// 03 - ACE – Adiantamento sobre Cambiais Entregues - Redução a Zero do IR e do IOF;
+/// 04 - BNDES-Exim Pós-Embarque – Serviços;
+/// 05 - BNDES-Exim Pré-Embarque - Serviços;
+/// 06 - FGE - Fundo de Garantia à Exportação;
+/// 07 - PROEX - EQUALIZAÇÃO
+/// 08 - PROEX - Financiamento;
+/// </summary>
+public enum ApoioComercioExteriorPrestador
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("00")]
+    Desconhecido = 0,
+    
+    [DFeEnum("01")]
+    Nenhum = 1,
+    
+    [DFeEnum("02")]
+    ACC = 2,
+    
+    [DFeEnum("03")]
+    ACE = 3,
+    
+    [DFeEnum("04")]
+    BNDESEximPosEmbarque = 4,
+    
+    [DFeEnum("05")]
+    BNDESEximPreEmbarque = 5,
+    
+    [DFeEnum("06")]
+    FGE = 6,
+    
+    [DFeEnum("07")]
+    PROEXEqualizacao = 7,
+    
+    [DFeEnum("08")]
+    PROEXFinanciamento = 8
 }

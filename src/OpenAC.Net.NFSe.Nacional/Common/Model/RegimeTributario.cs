@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : OpenAC.Net.NFSe.Nacional
 // Author           : RFTD
 // Created          : 09-09-2023
@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="RegimeTributario.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,25 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
+
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class RegimeTributario
 {
     #region Properties
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeElement(TipoCampo.Enum, "opSimpNac", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public OptanteSimplesNacional OptanteSimplesNacional { get; set; } = OptanteSimplesNacional.NaoOptante;
+
+    [DFeElement(TipoCampo.Enum, "regApTribSN", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public RegimeApuracao? RegimeApuracao { get; set; }
+
+    [DFeElement(TipoCampo.Enum, "regEspTrib", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public RegimeEspecial RegimeEspecial { get; set; } = RegimeEspecial.Nenhum;
 
     #endregion Properties
 }

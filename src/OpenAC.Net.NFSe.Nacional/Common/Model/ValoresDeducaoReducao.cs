@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ValoresDeducaoReducao.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using System.Collections.Generic;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class ValoresDeducaoReducao
 {
-    #region Properties
+    [DFeElement(TipoCampo.De2, "pDR", Min = 4, Max = 6, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public decimal Porcentagem { get; set; }
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeElement(TipoCampo.De2, "vDR", Min = 4, Max = 18, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public decimal Valor { get; set; }
 
-    #endregion Properties
+    [DFeCollection("documentos")]
+    [DFeItem(typeof(DocumentoDeducaoReducao), "docDedRed")]
+    public List<DocumentoDeducaoReducao> Documentos { get; set; } = new();
 }

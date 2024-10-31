@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
 // Assembly         : OpenAC.Net.NFSe.Nacional
-// Author           : RFTD
-// Created          : 09-09-2023
+// Author           : Rafael Dias
+// Created          : 30-10-2024
 //
-// Last Modified By : RFTD
-// Last Modified On : 09-09-2023
+// Last Modified By : Rafael Dias
+// Last Modified On : 30-10-2024
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="RespostaConsultaNsu.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Classe RespostaConsultaNsu
+/// </summary>
+public sealed class RespostaConsultaDFe : RespostaBase
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [JsonPropertyName("StatusProcessamento")]
+    [JsonConverter(typeof(JsonStringEnumConverter<StatusProcessamentoDistribuicao>))]
+    public StatusProcessamentoDistribuicao StatusProcessamento { get; set; }
+    
+    [JsonPropertyName("LoteDFe")]
+    public List<DFe> Lote { get; set; } = new();
 }

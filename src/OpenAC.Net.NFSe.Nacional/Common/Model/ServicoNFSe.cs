@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : OpenAC.Net.NFSe.Nacional
 // Author           : RFTD
 // Created          : 09-09-2023
@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ServicoNFSe.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,33 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class ServicoNFSe
 {
-    #region Properties
+    [DFeElement("locPrest", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public LocalidadeNFSe Localidade { get; set; } = new();
 
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeElement("cServ", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public InformacoesServico Informacoes { get; set; } = new();
+    
+    [DFeElement("comExt", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ServicoExterior? ServicoExterior { get; set; }
+    
+    [DFeElement("lsadppu", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public InformacoesLocacao? InformacoesLocacao { get; set; }
+    
+    [DFeElement("obra", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ObraNFSe? Obra { get; set; }
+    
+    [DFeElement("atvEvento", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public EventoServicoNFSe? Evento { get; set; }
+    
+    [DFeElement("explRod", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ExploracaoRodoviaria? ExploracaoRodoviaria { get; set; }
+    
+    [DFeElement("infoCompl", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public InformacoesComplementares? InformacoesComplementares { get; set; }
 }

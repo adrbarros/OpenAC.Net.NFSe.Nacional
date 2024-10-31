@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="EventoDesbloqueioOficio.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,19 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class EventoDesbloqueioOficio : IEventoNFSe
 {
-    #region Properties
+    [DFeElement(TipoCampo.Str, "xDesc", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string Descricao { get; set; } = "Desbloqueio de NFS-e por Ofício";
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeElement(TipoCampo.Str, "CPFAgTrib", Min = 11, Max = 11, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string CPFAgTrib { get; set; } = string.Empty;
 
-    #endregion Properties
+    [DFeElement(TipoCampo.StrNumber, "idBloqOfic", Min = 59, Max = 59, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string CodManifestacaoEvento { get; set; } = string.Empty;
 }

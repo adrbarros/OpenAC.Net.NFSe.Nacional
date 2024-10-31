@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ModoPrestacao.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,32 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+///  Modo de Prestação:
+///  0 - Desconhecido (tipo não informado na nota de origem);
+///  1 - Transfronteiriço;
+///  2 - Consumo no Brasil;
+///  3 - Presença Comercial no Exterior;
+///  4 - Movimento Temporário de Pessoas Físicas;
+/// </summary>
+public enum ModoPrestacao
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("0")]
+    Desconhecido = 0,
+    
+    [DFeEnum("1")]
+    Transfronteirico = 1,
+    
+    [DFeEnum("2")]
+    ConsumoBrasil = 2,
+    
+    [DFeEnum("3")]
+    PresencaComercialExterior = 3,
+    
+    [DFeEnum("4")]
+    MovimentoTemporarioPessoasFisicas = 4
 }

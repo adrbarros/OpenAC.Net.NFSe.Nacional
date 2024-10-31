@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="TributosNFSe.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,32 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class TributoMunicipal
 {
-    #region Properties
+    [DFeElement(TipoCampo.Enum, "tribISSQN", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public TributoISSQN ISSQN { get; set; }
 
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeElement(TipoCampo.Str, "cPaisResult", Min = 2, Max = 2, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public string? CodPais { get; set; }
+    
+    [DFeElement("tribMun", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public BeneficioMunicipal? Beneficio { get; set; }
+    
+    [DFeElement("tribMun", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ExigibilidadeSuspensa? Suspensao { get; set; }
+    
+    [DFeElement(TipoCampo.Enum, "tpImunidade", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public TipoImunidade? TipoImunidade { get; set; }
+    
+    [DFeElement(TipoCampo.De2, "pAliq", Min = 4, Max = 7, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public decimal? Aliquota{ get; set; }
+    
+    [DFeElement(TipoCampo.Enum, "tpRetISSQN", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public TipoRetencaoISSQN? TipoRetencaoISSQN { get; set; }
 }

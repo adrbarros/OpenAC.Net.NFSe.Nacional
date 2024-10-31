@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="EnderecoSimplesNFSe.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,41 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.Core.Extensions;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class EnderecoSimplesNFSe
 {
     #region Properties
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeElement(TipoCampo.Str, "CEP", Min = 8, Max = 8, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string CEP { get; set; } = string.Empty;
+
+    [DFeElement("endExt", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public EnderecoExterior? EnderecoExterior { get; set; }
+    
+    [DFeElement(TipoCampo.Str, "xLgr", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string Logradouro { get; set; } = string.Empty;
+
+    [DFeElement(TipoCampo.Str, "nro", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string Numero { get; set; } = string.Empty;
+    
+    [DFeElement(TipoCampo.Str, "xCpl", Min = 1, Max = 156, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public string? Complemento { get; set; }
+    
+    [DFeElement(TipoCampo.Str, "xBairro", Min = 1, Max = 60, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string Bairro { get; set; } = string.Empty;
 
     #endregion Properties
+
+    #region Methods
+
+    private bool ShouldSerializeCEP() => EnderecoExterior == null;
+    
+    private bool ShouldSerializeEnderecoExterior() => CEP.IsEmpty();
+    
+    #endregion Methods
 }

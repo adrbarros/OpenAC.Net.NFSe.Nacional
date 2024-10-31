@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="TipoAmbienteJsonConverter.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,23 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Converter;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public class TipoAmbienteJsonConverter : JsonConverter<DFeTipoAmbiente>
 {
-    #region Properties
+    public override DFeTipoAmbiente Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var valor = reader.GetInt32();
+        return (DFeTipoAmbiente) valor;
+    }
 
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    public override void Write(Utf8JsonWriter writer, DFeTipoAmbiente value, JsonSerializerOptions options)
+    {
+        writer.WriteNumberValue((int)value);
+    }
 }

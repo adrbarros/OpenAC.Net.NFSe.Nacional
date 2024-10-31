@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="CategoriaServico.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,32 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Categorias do serviço:
+/// 1 - Locação;
+/// 2 - Sublocação;
+/// 3 - Arrendamento;
+/// 4 - Direito de passagem;
+/// 5 - Permissão de uso;
+/// </summary>
+public enum CategoriaLocacao
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("1")]
+    Locacao = 1,
+    
+    [DFeEnum("2")]
+    Sublocacao,
+    
+    [DFeEnum("3")]
+    Arrendamento,
+    
+    [DFeEnum("4")]
+    DireitoPassagem,
+    
+    [DFeEnum("5")]
+    PermissaoUso
 }

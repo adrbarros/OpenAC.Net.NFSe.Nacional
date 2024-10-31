@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="MensagemProcessamento.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,29 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using System.Collections.Generic;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class MensagemProcessamento
 {
-    #region Properties
+    //Comentado, pois por mais que no swagger está minúsculo, está retornando maiúsculo
+    //[JsonPropertyName("mensagem")]
+    public string Mensagem { get; set; } = string.Empty;
 
-    public VersaoNFSe Versao { get; set; }
+    //Comentado, pois por mais que no swagger está minúsculo, está retornando maiúsculo
+    //[JsonPropertyName("codigo")]
+    public string Codigo { get; set; } = string.Empty;
 
-    #endregion Properties
+    //Comentado, pois por mais que no swagger está minúsculo, está retornando maiúsculo
+    //[JsonPropertyName("descricao")]
+    public string Descricao { get; set; } = string.Empty;
+
+    //Comentado, pois por mais que no swagger está minúsculo, está retornando maiúsculo
+    //[JsonPropertyName("complemento")]
+    public string Complemento { get; set; } = string.Empty;
+
+    //Comentado, pois por mais que no swagger está minúsculo, está retornando maiúsculo
+    //[JsonPropertyName("parametros")] 
+    public List<string> Parametros { get; set; } = new();
 }

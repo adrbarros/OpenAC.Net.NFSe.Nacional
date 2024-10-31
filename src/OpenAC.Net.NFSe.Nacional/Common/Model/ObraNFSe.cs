@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ServicoNFSe.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,19 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class ObraNFSe
 {
-    #region Properties
+    [DFeElement(TipoCampo.Str, "cObra", Min = 1, Max = 30, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string CodObra { get; set; } = string.Empty;
+    
+    [DFeElement(TipoCampo.Str, "inscImobFisc", Min = 1, Max = 30, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string InscricaoImobiliaria { get; set; } = string.Empty;
 
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeElement("end", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public EnderecoSimplesNFSe Endereco { get; set; } = new();
 }

@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="Dps.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,50 @@
 // <summary></summary>
 // ***********************************************************************
 
+using OpenAC.Net.DFe.Core.Attributes;
 using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Document;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+[DFeSignInfoElement("infDPS")]
+[DFeRoot("DPS", Namespace = "http://www.sped.fazenda.gov.br/nfse")]
+public sealed class Dps : DFeSignDocument<Dps>
 {
+    #region Constructors
+
+    public Dps()
+    {
+        Signature = new DFeSignature();
+    }
+
+    #endregion Constructors
+    
     #region Properties
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeAttribute(TipoCampo.Str, "versao", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string Versao { get; set; } = string.Empty;
+
+    [DFeElement("infDPS", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public InfDps Informacoes { get; set; } = new();
 
     #endregion Properties
+    
+    #region Methods
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="configuracao"></param>
+    public void Assinar(ConfiguracaoNFSe configuracao)
+    {
+        var options = DFeSaveOptions.DisableFormatting;
+        if (configuracao.Geral.RetirarAcentos)
+            options |= DFeSaveOptions.RemoveAccents;
+        
+        AssinarDocumento(configuracao.Certificados.ObterCertificado(), options, false);
+    }
+
+    #endregion Methods
 }

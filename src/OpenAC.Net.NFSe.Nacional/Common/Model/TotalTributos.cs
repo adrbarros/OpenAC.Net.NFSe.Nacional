@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="TotalTributos.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,34 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// TIPO COMPLEXO PARA INFORMAÇÕES DE TRIBUTAÇÃO ESPECÍFICA PARA TOTAL DOS TRIBUTOS
+/// So pode usar 1 dos tipos abaixo.
+/// </summary>
+public sealed class TotalTributos
 {
-    #region Properties
+    [DFeElement("vTotTrib", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ValorTotalTributos? ValorTotal { get; set; }
+    
+    [DFeElement("pTotTrib", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public PorcentagemTotalTributos? PorcentagemTotal { get; set; }
 
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    /// <summary>
+    /// Indicador de informação de valor total de tributos. Possui valor fixo igual a zero (indTotTrib=0).
+    /// Não informar nenhum valor estimado para os Tributos (Decreto 8.264/2014).
+    /// 0 - Não;
+    /// </summary>
+    [DFeElement(TipoCampo.Int, "indTotTrib", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public int? IndicadorTotal { get; set; }
+    
+    /// <summary>
+    /// Valor percentual aproximado do total dos tributos da alíquota do Simples Nacional (%)
+    /// </summary>
+    [DFeElement(TipoCampo.De2, "pTotTribSN", Min = 4, Max = 5, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public decimal? PercetualSimples { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿// ***********************************************************************
+// ***********************************************************************
 // Assembly         : OpenAC.Net.NFSe.Nacional
 // Author           : RFTD
 // Created          : 09-09-2023
@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="DpsSubstituida.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,24 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class DpsSubstituida
 {
     #region Properties
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeElement(TipoCampo.Str, "chSubstda", Min = 50, Max = 50, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string ChaveSubstituida { get; set; } = string.Empty;
+
+    [DFeElement(TipoCampo.Enum, "cMotivo", Min = 2, Max = 2, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public MotivoSubstituicao CodigoMotivo { get; set; }
+
+    [DFeElement(TipoCampo.Str, "xMotivo", Min = 15, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public string? Motivo { get; set; }
 
     #endregion Properties
 }

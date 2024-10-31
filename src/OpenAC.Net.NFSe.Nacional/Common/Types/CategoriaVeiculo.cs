@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="CategoriaVeiculo.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,56 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+/// <summary>
+/// Categorias de veículos para cobrança:
+/// 00 - Categoria de veículos (tipo não informado na nota de origem)
+/// 01 - Automóvel, caminhonete e furgão;
+/// 02 - Caminhão leve, ônibus, caminhão trator e furgão;
+/// 03 - Automóvel e caminhonete com semireboque;
+/// 04 - Caminhão, caminhão-trator, caminhão-trator com semi-reboque e ônibus;
+/// 05 - Automóvel e caminhonete com reboque;
+/// 06 - Caminhão com reboque;
+/// 07 - Caminhão trator com semi-reboque;
+/// 08 - Motocicletas, motonetas e bicicletas motorizadas;
+/// 09 - Veículo especial;
+/// 10 - Veículo Isento;
+/// </summary>
+public enum CategoriaVeiculo
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("00")]
+    NaoInformado,
+    
+    [DFeEnum("01")]
+    AutomovelCaminhoneteFurgao,
+    
+    [DFeEnum("02")]
+    CaminhaoLeveonibusCaminhaoTratorFurgao,
+    
+    [DFeEnum("03")]
+    AutomovelCaminhoneteComSemireboque,
+    
+    [DFeEnum("04")]
+    CaminhaoCaminhãoTratorCaminhaoTratorComSemiReboqueOnibus,
+    
+    [DFeEnum("05")]
+    AutomovelCaminhoneteReboque,
+    
+    [DFeEnum("06")]
+    CaminhaoComReboque,
+    
+    [DFeEnum("07")]
+    CaminhaoTratorComSemiReboque,
+    
+    [DFeEnum("08")]
+    MotocicletasMotonetasBicicletasMotorizadas,
+    
+    [DFeEnum("09")]
+    VeiculoSspecial,
+    
+    [DFeEnum("10")]
+    VeiculoIsento
 }

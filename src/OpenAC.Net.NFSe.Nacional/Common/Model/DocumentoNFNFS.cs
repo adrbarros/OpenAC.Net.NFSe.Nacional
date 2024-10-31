@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="DocumentoNFNFS.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,19 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class DocumentoNFNFS
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeElement(TipoCampo.Int, "nNFS", Min = 1, Max = 7, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public int Numero { get; set; } = 1;
+    
+    [DFeElement(TipoCampo.Int, "modNFS", Min = 1, Max = 15, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public int Modelo { get; set; } = 1;
+    
+    [DFeElement(TipoCampo.StrNumber, "serieNFS", Min = 1, Max = 15, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public string? Serie { get; set; }
 }

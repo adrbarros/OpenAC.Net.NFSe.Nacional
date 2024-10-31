@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="NFSeResponse.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,46 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using System;
+using System.Text.Json;
+using OpenAC.Net.Core.Logging;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class NFSeResponse<T>: IOpenLog where T : class, new()
 {
+    #region Constructors
+
+    internal NFSeResponse(string xmlEnvio, string envio, string resposta, bool sucesso)
+    {
+        XmlEnvio = xmlEnvio;
+        JsonEnvio = envio;
+        JsonRetorno = resposta;
+        Sucesso = sucesso;
+        try
+        {
+            Resultado = JsonSerializer.Deserialize<T>(resposta);
+        }
+        catch (Exception e)
+        {
+            this.Log().Error(e);
+            Resultado = null;
+        }
+    }
+
+    #endregion Constructors
+    
     #region Properties
 
-    public VersaoNFSe Versao { get; set; }
+    public string XmlEnvio { get; }
+
+    public string JsonEnvio { get; }
+
+    public string JsonRetorno { get; }
+    
+    public bool Sucesso { get; }
+    
+    public T? Resultado { get; }
 
     #endregion Properties
 }

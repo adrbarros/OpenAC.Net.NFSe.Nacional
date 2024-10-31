@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="EventoServicoNFSe.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,39 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using System;
+using OpenAC.Net.Core.Extensions;
+using OpenAC.Net.DFe.Core.Attributes;
+using OpenAC.Net.DFe.Core.Serializer;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class EventoServicoNFSe
 {
     #region Properties
 
-    public VersaoNFSe Versao { get; set; }
+    [DFeElement(TipoCampo.Str, "desc", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public string Descricao { get; set; } = string.Empty;
+    
+    [DFeElement(TipoCampo.Dat, "dtIni", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public DateTime DataInicio { get; set; } = DateTime.Today;
+    
+    [DFeElement(TipoCampo.Dat, "dtFim", Min = 1, Max = 255, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public DateTime DataFim { get; set; } = DateTime.Today;
+    
+    [DFeElement(TipoCampo.Str, "id", Min = 1, Max = 30, Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public string IdEvento { get; set; } = string.Empty;
+
+    [DFeElement("end", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public EnderecoSimplesNFSe? Endereco { get; set; }
 
     #endregion Properties
+    
+    #region Methods
+
+    private bool ShouldSerializeIdEvento() => Endereco == null;
+    
+    private bool ShouldSerializeEndereco() => IdEvento.IsEmpty();
+    
+    #endregion Methods
 }

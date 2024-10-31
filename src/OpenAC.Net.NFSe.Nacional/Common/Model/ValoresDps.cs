@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ValoresDps.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,21 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
+using OpenAC.Net.DFe.Core.Attributes;
 
-namespace OpenAC.Net.NFSe.Nacional;
+namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+public sealed class ValoresDps
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeElement("vServPrest", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public ValoresServico ValoresServico { get; set; } = new();
+    
+    [DFeElement("vDescCondIncond", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ValoresDesconto? ValoresDesconto { get; set; }
+    
+    [DFeElement("vDedRed", Ocorrencia = Ocorrencia.NaoObrigatoria)]
+    public ValoresDeducaoReducao? ValoresDeducaoReducao { get; set; }
+    
+    [DFeElement("trib", Ocorrencia = Ocorrencia.Obrigatoria)]
+    public TributosNFSe Tributos { get; set; } = new();
 }

@@ -6,7 +6,7 @@
 // Last Modified By : RFTD
 // Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="NFSeGeralConfig.cs" company="OpenAC .Net">
+// <copyright file="ObjetoLocacao.cs" company="OpenAC .Net">
 //		        		   The MIT License (MIT)
 //	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
 //
@@ -29,17 +29,37 @@
 // <summary></summary>
 // ***********************************************************************
 
-using OpenAC.Net.DFe.Core.Common;
-using OpenAC.Net.NFSe.Nacional.Common;
-using OpenAC.Net.NFSe.Nacional.Common.Types;
 
-namespace OpenAC.Net.NFSe.Nacional;
+using OpenAC.Net.DFe.Core.Attributes;
 
-public sealed class NFSeGeralConfig : DFeGeralConfigBase
+namespace OpenAC.Net.NFSe.Nacional.Common.Types;
+
+/// <summary>
+/// Tipo de objetos da locação, sublocação, arrendamento, direito de passagem ou permissão de uso:
+/// 1 - Ferrovia;
+/// 2 - Rodovia;
+/// 3 - Postes;
+/// 4 - Cabos;
+/// 5 - Dutos;
+/// 6 - Condutos de qualquer natureza;
+/// </summary>
+public enum ObjetoLocacao
 {
-    #region Properties
-
-    public VersaoNFSe Versao { get; set; }
-
-    #endregion Properties
+    [DFeEnum("1")]
+    Ferrovia = 1,
+    
+    [DFeEnum("2")]
+    Rodovia,
+    
+    [DFeEnum("3")]
+    Postes,
+    
+    [DFeEnum("4")]
+    Cabos,
+    
+    [DFeEnum("5")]
+    Dutos,
+    
+    [DFeEnum("6")]
+    Condutos
 }
