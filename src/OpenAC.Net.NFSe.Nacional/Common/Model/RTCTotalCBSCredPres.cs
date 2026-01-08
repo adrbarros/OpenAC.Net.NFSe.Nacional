@@ -1,24 +1,24 @@
-﻿// ***********************************************************************
-// Assembly         : OpenAC.Net.NFSe.Nacional
-// Author           : RFTD
-// Created          : 09-09-2023
-//
-// Last Modified By : RFTD
-// Last Modified On : 09-09-2023
 // ***********************************************************************
-// <copyright file="InformacoesComplementares.cs" company="OpenAC .Net">
-//		        		   The MIT License (MIT)
-//	     		    Copyright (c) 2014-2023 Grupo OpenAC.Net
+// Assembly         : OpenAC.Net.NFSe.Nacional
+// Author           : lucasmoraes804
+// Created          : 13-05-2025
 //
-//	 Permission is hereby granted, free of charge, to any person obtaining
+// Last Modified By : lucasmoraes804
+// Last Modified On : 13-05-2025
+// ***********************************************************************
+// <copyright file="RTCTotalCBSCredPres.cs" company="OpenAC .Net">
+// The MIT License (MIT)
+// Copyright (c) 2014-2025 Grupo OpenAC.Net
+//
+// Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
 // to deal in the Software without restriction, including without limitation
 // the rights to use, copy, modify, merge, publish, distribute, sublicense,
 // and/or sell copies of the Software, and to permit persons to whom the
 // Software is furnished to do so, subject to the following conditions:
-//	 The above copyright notice and this permission notice shall be
+// The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-//	 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 // IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
@@ -26,7 +26,6 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 // </copyright>
-// <summary></summary>
 // ***********************************************************************
 
 using OpenAC.Net.DFe.Core.Attributes;
@@ -35,25 +34,20 @@ using OpenAC.Net.DFe.Core.Serializer;
 namespace OpenAC.Net.NFSe.Nacional.Common.Model;
 
 /// <summary>
-/// Representa informações complementares do documento.
+/// Totais de credito presumido para a CBS.
 /// </summary>
-public sealed class InformacoesComplementares
+public sealed class RTCTotalCBSCredPres
 {
     /// <summary>
-    /// Identificador do documento técnico.
+    /// Aliquota do credito presumido da CBS.
     /// </summary>
-    [DFeElement(TipoCampo.Str, "idDocTec", Min = 1, Max = 40, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-    public string IdDocTec { get; set; }
-    
+    [DFeElement(TipoCampo.De2, "pCredPresCBS", Min = 1, Max = 3, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public decimal PercentualCreditoPresumido { get; set; }
+
     /// <summary>
-    /// Documento de referência.
+    /// Valor do credito presumido da CBS.
     /// </summary>
-    [DFeElement(TipoCampo.Str, "docRef", Min = 1, Max = 255, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-    public string DocRef { get; set; }
-    
-    /// <summary>
-    /// Informações complementares.
-    /// </summary>
-    [DFeElement(TipoCampo.Str, "xInfComp", Min = 1, Max = 2000, Ocorrencia = Ocorrencia.NaoObrigatoria)]
-    public string Informacoes { get; set; }
+    [DFeElement(TipoCampo.De2, "vCredPresCBS", Min = 4, Max = 18, Ocorrencia = Ocorrencia.Obrigatoria)]
+    public decimal ValorCreditoPresumido { get; set; }
 }
+
