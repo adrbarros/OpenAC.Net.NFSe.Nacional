@@ -29,6 +29,7 @@
 // <summary></summary>
 // ***********************************************************************
 
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -188,7 +189,8 @@ public class NacionalWebservice : NFSeWebserviceBase
     /// <returns>Resposta do envio do evento.</returns>
     public override async Task<NFSeResponse<RespostaEnvioEvento>> EnviarEventoAsync(PedidoRegistroEvento evento)
     {
-        evento.Assinar(Configuracao);
+        if (Configuracao.Geral.AssinarXml)
+            evento.Assinar(Configuracao);
 
         ValidarSchema(SchemaNFSe.Evento, evento.Xml, evento.Versao);
 
@@ -254,8 +256,7 @@ public class NacionalWebservice : NFSeWebserviceBase
             PropertyNameCaseInsensitive = true,
         };
 
-        var retorno = NFSeResponse<RespostaEnvioEvento>.Create(evento.Xml, strEnvio, strResponse,
-            httpResponse.IsSuccessStatusCode, jsonOptions);
+        var retorno = NFSeResponse<RespostaEnvioEvento>.Create(evento.Xml, strEnvio, strResponse, httpResponse.IsSuccessStatusCode, jsonOptions);
 
         if (retorno.Sucesso)
         {
@@ -284,7 +285,13 @@ public class NacionalWebservice : NFSeWebserviceBase
     /// <returns>Resposta do envio da DPS.</returns>
     public override async Task<NFSeResponse<RespostaEnvioDps>> EnviarAsync(Dps dps)
     {
-        dps.Assinar(Configuracao);
+        if (Configuracao.Geral.AssinarXml)
+        {
+            Console.WriteLine("Assinando DPS");
+            dps.Assinar(Configuracao);
+        }
+        else
+            Console.WriteLine("SKIP assinatura DPS");
 
         ValidarSchema(SchemaNFSe.DPS, dps.Xml, dps.Versao);
 
