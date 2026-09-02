@@ -20,9 +20,9 @@
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <NeutralLanguage>pt-BR</NeutralLanguage>
-        <AssemblyVersion>1.0.0.1</AssemblyVersion>
-        <FileVersion>1.0.0.1</FileVersion>
-        <Version>1.1.0</Version>
+        <AssemblyVersion>1.5.0.2</AssemblyVersion>
+        <FileVersion>1.5.0.2</FileVersion>
+        <Version>1.5.0.2</Version>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <DebugType>embedded</DebugType>
@@ -49,6 +49,8 @@
 
     <ItemGroup>
         <EmbeddedResource Include="Resources\Fonts\*.ttf" />
+        <EmbeddedResource Include="Resources\Images\NfseHorizontal.png" />
+        <EmbeddedResource Include="Resources\MunicipiosIBGE.json" />
     </ItemGroup>
 
     <!-- Itens do pacote nuget -->

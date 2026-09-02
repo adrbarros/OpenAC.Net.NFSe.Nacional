@@ -287,20 +287,20 @@ public class TestDANFSePDF
         // 6. Exemplo com Texto Longo (Folha de Continuação)
         var notaLonga = CriarNotaExemplo();
         var sbServico = new StringBuilder();
-        for (int i = 1; i <= 25; i++)
+        for (var i = 1; i <= 25; i++)
         {
             sbServico.AppendLine($"Item {i:D2}: Prestação de serviços especializados de consultoria técnica, arquitetura de software em nuvem, implantação de pipelines CI/CD e suporte contínuo sob demanda.");
         }
         notaLonga.Informacoes.Dps.Informacoes.Servico.Informacoes.Descricao = sbServico.ToString();
 
         var sbCompl = new StringBuilder();
-        for (int i = 1; i <= 30; i++)
+        for (var i = 1; i <= 30; i++)
         {
             sbCompl.AppendLine($"Observação contratual {i:D2}: Documento emitido em conformidade com o Termo de Cooperação Técnica nº {i * 100}/2026. Pagamento via chave Pix bancária vinculada.");
         }
         notaLonga.Informacoes.Valores.OutrasInformacoes = sbCompl.ToString();
 
-        var pathLonga = Path.Combine(outputDir, "Exemplo_DANFSe_TextoLongo_Continuacao.pdf");
+        var pathLonga = Path.Combine(outputDir, "Exemplo_DANFSe_TextoLongo_PaginaUnica.pdf");
         OpenDANFSeNacional.GerarPDF(notaLonga, pathLonga, configPadrao);
 
         await Assert.That(File.Exists(pathPadrao)).IsTrue();
@@ -312,11 +312,11 @@ public class TestDANFSePDF
     }
 
     [Test]
-    public async Task GerarPDF_ComTextoLongoServico_GeraPaginaDeContinuacao()
+    public async Task GerarPDF_ComTextoLongoServico_MantemPaginaUnica()
     {
         var nota = CriarNotaExemplo();
         var sb = new StringBuilder();
-        for (int i = 1; i <= 30; i++)
+        for (var i = 1; i <= 30; i++)
         {
             sb.AppendLine($"Linha {i}: Descrição detalhada do serviço prestado para o cliente com escopo estendido.");
         }
@@ -328,15 +328,15 @@ public class TestDANFSePDF
         using var readMs = new MemoryStream(ms.ToArray());
         using var pdfDoc = PdfSharp.Pdf.IO.PdfReader.Open(readMs, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import);
 
-        await Assert.That(pdfDoc.PageCount).IsGreaterThan(1);
+        await Assert.That(pdfDoc.PageCount).IsEqualTo(1);
     }
 
     [Test]
-    public async Task GerarPDF_ComTextoLongoInformacoesComplementares_GeraPaginaDeContinuacao()
+    public async Task GerarPDF_ComTextoLongoInformacoesComplementares_MantemPaginaUnica()
     {
         var nota = CriarNotaExemplo();
         var sb = new StringBuilder();
-        for (int i = 1; i <= 80; i++)
+        for (var i = 1; i <= 80; i++)
         {
             sb.AppendLine($"Cláusula {i}: Observações adicionais do contrato, retenções municipais, federais e regras específicas do convênio firmado com detalhamento extenso.");
         }
@@ -348,7 +348,7 @@ public class TestDANFSePDF
         using var readMs = new MemoryStream(ms.ToArray());
         using var pdfDoc = PdfSharp.Pdf.IO.PdfReader.Open(readMs, PdfSharp.Pdf.IO.PdfDocumentOpenMode.Import);
 
-        await Assert.That(pdfDoc.PageCount).IsGreaterThan(1);
+        await Assert.That(pdfDoc.PageCount).IsEqualTo(1);
     }
 
     private static NotaFiscalServico CriarNotaExemplo()
